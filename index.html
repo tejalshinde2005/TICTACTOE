@@ -5,69 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TicTacToe</title>
     <style>
-
-        body{
-            background-color:  #ffcccc;
-            margin:0;
+        body {
+            background-color: #ffcccc;
+            margin: 0;
             padding: 0;
         }
-        .board{
+
+        .board {
             border: 1px solid #fab18f;
             width: fit-content;
             margin: 40px auto;
             background-color: #e45858;
             box-shadow: 0 0 10px 5px rgb(15, 10, 10);
             padding: 10px;
-
         }
 
-        .box{
+        .box {
             background-color: #ff9999;
             height: 100px;
             width: 100px;
-            margin:5px;
-
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        .Text{
+        .box:hover{
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 5px 2px rgb(95, 95, 95);
+            border-radius: 5px;
+        }
+
+        .Text {
             text-align: center;
         }
 
-        .row{
-            display :flex;
+        .row {
+            display: flex;
         }
     </style>
 </head>
 <body>
-    <h1 class=" Text">Tic Tac Toe</h1>
+    <h1 class="Text">Tic Tac Toe</h1>
     <div class="board">
         <div class="row">
-            <div class="box"> </div>
-            <div class="box"> </div>
-            <div class="box"> </div>
-
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
         </div>
-     <div>
-        <div  class="row">
-            <div class="box"> </div>
-            <div class="box">  </div>
-            <div class="box">  </div>
+        <div class="row">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
         </div>
-
-        <div  class="row">
-            <div class="box"> </div>
-            <div class="box"> </div>
-            <div class="box"> </div>
-                    
+        <div class="row">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
         </div>
     </div>
-    
-<script>
-    const board =[ -1,-1,-1,-1,-1,-1,-1,-1,-1]
-    
-    
-</script>
+
+    <script>
+        const board = ['X', 'O', -1, -1, -1, -1, -1, -1, -1];
+
+        function reader() {
+            const AllBoxes = document.querySelectorAll(".box");
+            AllBoxes.forEach((boxElement, i) => {
+                if (board[i] === 'X') {
+                    boxElement.innerHTML = 'X';
+                } else if (board[i] === 'O') {
+                    boxElement.innerHTML = 'O';
+                } else {
+                    boxElement.innerHTML = '';
+                }
+            });
+        }
 
 
+        // Run reader to update the board display
+        reader();
+    </script>
 </body>
 </html>
