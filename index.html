@@ -33,8 +33,7 @@
             cursor: pointer;
         }
 
-        .box:hover{
-            cursor: pointer;
+        .box:hover {
             transition: 0.3s;
             box-shadow: 0 0 5px 2px rgb(95, 95, 95);
             border-radius: 5px;
@@ -47,48 +46,99 @@
         .row {
             display: flex;
         }
+        .btn1{
+            display: block;
+            margin : 0 auto;
+            padding: 10px 10px;
+            background-color: #e45858;
+            color: white;
+        }
     </style>
 </head>
 <body>
+
     <h1 class="Text">Tic Tac Toe</h1>
     <br>
-    <p class="Text  currentplayer1">Current Player : X</p>
+    <p class="Text currentplayer1" id="currentPlayerText">Current Player: <span id="CurrentPlayer">X</span></p>
+
     <div class="board">
         <div class="row">
             <div class="box" onclick="selectBox(0)"></div>
-            <div class="box"onclick="selectBox(1)"></div>
-            <div class="box"onclick="selectBox(2)"></div>
+            <div class="box" onclick="selectBox(1)"></div>
+            <div class="box" onclick="selectBox(2)"></div>
         </div>
         <div class="row">
-            <div class="box"onclick="selectBox(3)"></div>
-            <div class="box"onclick="selectBox(5)"></div>
+            <div class="box" onclick="selectBox(3)"></div>
+            <div class="box" onclick="selectBox(4)"></div>
+            <div class="box" onclick="selectBox(5)"></div>
         </div>
         <div class="row">
-            <div class="box"onclick="selectBox(6)"></div>
-            <div class="box"onclick="selectBox(7)"></div>
-            <div class="box"onclick="selectBox(8)"></div>
+            <div class="box" onclick="selectBox(6)"></div>
+            <div class="box" onclick="selectBox(7)"></div>
+            <div class="box" onclick="selectBox(8)"></div>
         </div>
     </div>
 
+    <button class="btn1" onclick="resetboard()">Reset Game</button>
+
     <script>
         const board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
-        let CurrentPlayer 
+        let CurrentPlayer = 'X'; // Start with 'X'
+
         function reader() {
             const AllBoxes = document.querySelectorAll(".box");
             AllBoxes.forEach((boxElement, i) => {
-                if (board[i] === 'X') {
-                    boxElement.innerHTML = 'X';
-                } else if (board[i] === 'O') {
-                    boxElement.innerHTML = 'O';
+                if (board[i] === 'X' || board[i] === 'O') {
+                    boxElement.innerHTML = board[i];
                 } else {
                     boxElement.innerHTML = '';
                 }
             });
         }
 
+        function selectBox(BoxNumber) {
+            if (board[BoxNumber] !== -1) {
+                alert("Invalid Move");
+                return;
+            }
+            
+            board[BoxNumber] = CurrentPlayer; // Update board with current player's move
+            reader(); // Update UI
 
-        // Run reader to update the board display
-        reader();
+            // Switch player
+            if (CurrentPlayer === 'X') {
+                CurrentPlayer = 'O';
+            } else {
+                CurrentPlayer = 'X';
+            }
+
+            document.getElementById("CurrentPlayer").innerHTML = CurrentPlayer;
+            function checkforwinner();
+        }
+
+        function resetboard(){
+            board.fill(-1);
+            reader();
+        }
+        CurrentPlayer = "X";
+         document.getElementById("CurrentPlayer").innerHTML = CurrentPlayer;
+
+         function checkforwinner(){
+/* winning position
+0,1,2
+3,4,5
+6,7,8
+0,3,6
+1,4,7
+2,5,8
+0,4,8
+2,4,6 
+*/
+if(board[0] == 'X'  && board[1] == 'X' && board[2] == 'X'){
+    alert("Player x winner");
+}
+         }
     </script>
+
 </body>
 </html>
